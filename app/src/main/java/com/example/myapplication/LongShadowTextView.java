@@ -25,6 +25,8 @@ public class LongShadowTextView extends View {
     private Bitmap mBitmap;
     private Paint mPaint;
     private Rect mTextBounds;
+    private Rect mSrc;
+    private RectF mDst;
 
     public LongShadowTextView(Context context) {
         super(context);
@@ -102,6 +104,9 @@ public class LongShadowTextView extends View {
         if (mPaint == null) {
             mPaint = new Paint();
             mPaint.setAntiAlias(true);
+
+            mSrc = new Rect();
+            mDst = new RectF();
         }
 
         mPaint.setColor(mShadowColor);
@@ -153,6 +158,19 @@ public class LongShadowTextView extends View {
 
         if (mBitmap != null) {
             canvas.drawBitmap(mBitmap, offsetX, offsetY, null);
+
+            mSrc.right = mBitmap.getWidth();
+            mSrc.top = mBitmap.getHeight() - 1;
+            mSrc.bottom = mBitmap.getHeight();
+
+            for (int x = (int) offsetX + 1, y = (int) (offsetY + mBitmap.getHeight()), h = canvas.getHeight(); y < h; ++x, ++y) {
+                mDst.left = x;
+                mDst.right = x + mBitmap.getWidth();
+                mDst.top = y;
+                mDst.bottom = y + 1;
+
+                canvas.drawBitmap(mBitmap, mSrc, mDst, null);
+            }
         }
 
         mPaint.setColor(mTextColor);
