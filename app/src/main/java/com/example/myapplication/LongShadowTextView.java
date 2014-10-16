@@ -148,11 +148,14 @@ public class LongShadowTextView extends View {
             return;
         }
 
+        float offsetX = (canvas.getWidth() - mTextBounds.width()) / 2f;
+        float offsetY = (canvas.getHeight() - mTextBounds.height()) / 2f;
+
         if (mBitmap != null) {
-            canvas.drawBitmap(mBitmap, 0, 0, null);
+            canvas.drawBitmap(mBitmap, offsetX, offsetY, null);
         }
 
         mPaint.setColor(mTextColor);
-        canvas.drawText(mText, 0, -mTextBounds.top, mPaint);
+        canvas.drawText(mText, offsetX, offsetY - mTextBounds.top, mPaint);
     }
 }
