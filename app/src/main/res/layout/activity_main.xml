@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.myapplication.LongShadowTextView
+    <com.shamanland.longshadowtextview.LongShadowTextView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="120dp"
