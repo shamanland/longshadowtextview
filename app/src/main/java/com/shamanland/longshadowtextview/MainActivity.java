@@ -13,6 +13,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         LongShadowTextView logo = (LongShadowTextView) findViewById(R.id.logo);
+
+        //setParams(logo);
+    }
+
+    private void setParams(LongShadowTextView logo) {
         // NOTE convert 48dp to pixels
         logo.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 48, getResources().getDisplayMetrics()));
         logo.setTextColor(Color.YELLOW);
