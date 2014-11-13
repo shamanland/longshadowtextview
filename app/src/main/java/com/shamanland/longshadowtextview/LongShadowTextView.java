@@ -1,6 +1,7 @@
 package com.shamanland.longshadowtextview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -29,15 +30,28 @@ public class LongShadowTextView extends View {
     private RectF mDst;
 
     public LongShadowTextView(Context context) {
-        super(context);
+        this(context, null, 0);
     }
 
     public LongShadowTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public LongShadowTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init(attrs);
+    }
+
+    private void init(AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.LongShadowTextView);
+            mTextSize = (int) a.getDimension(R.styleable.LongShadowTextView_text_size, DEFAULT_TEXT_SIZE);
+            mTextColor = a.getColor(R.styleable.LongShadowTextView_text_color, DEFAULT_TEXT_COLOR);
+            mShadowColor = a.getColor(R.styleable.LongShadowTextView_shadow_color, DEFAULT_SHADOW_COLOR);
+            mText = a.getString(R.styleable.LongShadowTextView_text);
+            a.recycle();
+        }
+        refresh();
     }
 
     public String getText() {
